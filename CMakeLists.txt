@@ -8,11 +8,16 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 find_package( OpenCL REQUIRED )
 
 include_directories( ${OPENCL_INCLUDE_DIRS} )
-include_directories( "{CMAKE_SOURCE_DIR}/common" )
+
+
+set(COMMON_DIR ${PROJECT_SOURCE_DIR}/common)
+set(BASIC_FILES "${COMMON_DIR}/basic.cpp"
+                "${COMMON_DIR}/cmdparser.cpp"
+                "${COMMON_DIR}/oclobject.cpp")
 
 add_subdirectory(BitonicSort)
-#add_subdirectory(CapsBasic)
-#add_subdirectory(GEMM)
+add_subdirectory(CapsBasic)
+add_subdirectory(GEMM)
 #add_subdirectory(GodRays)
 #add_subdirectory(MedianFilter)
 #add_subdirectory(MonteCarlo)
