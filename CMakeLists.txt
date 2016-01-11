@@ -18,7 +18,7 @@ set(BASIC_FILES "${COMMON_DIR}/basic.cpp"
 add_subdirectory(BitonicSort)
 add_subdirectory(CapsBasic)
 add_subdirectory(GEMM)
-#add_subdirectory(GodRays)
+add_subdirectory(GodRays)
 #add_subdirectory(MedianFilter)
 #add_subdirectory(MonteCarlo)
 #add_subdirectory(MotionEstimation)
