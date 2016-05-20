@@ -289,19 +289,32 @@ void gemm (
             local_size,
             0, 0, 0
         );
-        SAMPLE_CHECK_ERRORS(err);
+        //SAMPLE_CHECK_ERRORS(err);
 
-        err = clFinish(oclobjects.queue);
-        SAMPLE_CHECK_ERRORS(err);
+        //err = clFinish(oclobjects.queue);
+        //SAMPLE_CHECK_ERRORS(err);
 
         // It is important to measure end host time after clFinish call
         double end = time_stamp();
 
         double time = end - start;
-        cout << "Host time: " << time << " sec.\n";
-        cout << "Host perf: " << flops/time/1e9 << " GFLOPS\n";
+        double cpu_start = time_stamp();
+        for(i =0; i < 1000000000; i ++) {
+            double a = 1000000000000000000 + i;
+            double b = a + i;
+            double c = a + b;
+        }
+        double cpu_stop = time_stamp();
+        double time_cpu = cpu_stop - cpu_start;
+        double clfinish_start = time_stamp();
+        err = clFinish(oclobjects.queue);
+        double clfinish_time = time_stamp() - clfinish_start;
+        double total_time = time_stamp() - start;
+        cout << "enqueue time: " << time << " sec.\n";
         cout.flush();
-
+        cout << "cpu time: " << time_cpu << "sec." <<endl;
+        cout << "clfinish time: " << clfinish_time << "sec." <<endl;
+        cout << "time total: " << total_time << "sec." << endl;
         if(i == 0 && cmdparser.validation.getValue())
         {
             // Validate result for the first iteration only and
